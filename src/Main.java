@@ -57,6 +57,11 @@ public class Main {
         Question question1 = new Question("Cual es la capital de Portugal?:","Lisboa","Geografia");
         Question question2 = new Question("Cuantas caras tiene un dado?:","Seis caras", "Diversion");
         Question question3 = new Question("De que color es el caballo blanco de SAntiago?:","Blanco", "Culturilla General");
+        Question question16 = new Question("¿Quién escribió La Odisea?","Homero", "Culturilla General");
+        Question question17 = new Question("¿Qué tipo de animal es la ballena?","Mamifero", "Culturilla General");
+        Question question18 = new Question("¿Qué cantidad de huesos en el cuerpo humano adulto?","206", "Culturilla General");
+        Question question19 = new Question("¿Cuándo acabó la II Guerra Mundial?","1945", "Culturilla General");
+
         Question question4 = new Question("Quien escribió 100 años de soledad?:","Garcia Marquez","Literatura y cine");
         Question question5 = new Question("Quien dirigió el film Indiana Jones?:","Steven Spilberg","Literatura y cine");
         Question question6 = new Question("Donde nace el rio Ebro?:","Fontibre","Geografia");
@@ -72,6 +77,11 @@ public class Main {
         questions.add(question7);
         questions.add(question8);
         questions.add(question9);
+        questions.add(question16);
+        questions.add(question17);
+        questions.add(question18);
+        questions.add(question19);
+
         return questions;
     }
 }
