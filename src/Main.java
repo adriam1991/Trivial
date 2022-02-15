@@ -63,7 +63,7 @@ public class Main {
         Question question19 = new Question("¿Cuándo acabó la II Guerra Mundial?","1945", "Culturilla General");
         Question question4 = new Question("Quien escribió 100 años de soledad?:","Garcia Marquez","Literatura y cine");
         Question question5 = new Question("Quien dirigió el film Indiana Jones?:","Steven Spilberg","Literatura y cine");
-        Question question11 = new Question("Cuantas caras tiene el cubo de rubick?:","6","Diversion");
+        Question question11 = new Question("¿Qué cosa se mantiene siempre en el suelo y en las paredes pero nunca se ensucia?:","Sombra","Diversion");
         Question question12 = new Question("¿Qué sube, pero nunca baja?:","Edad","Diversion");
         Question question13 = new Question("¿Qué entra duro pero sale blando y suave?:","Chicle","Diversion");
         Question question6 = new Question("Donde nace el rio Ebro?:","Fontibre","Geografia");
