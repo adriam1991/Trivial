@@ -19,6 +19,12 @@ public class Main {
 
         }
 
+        int totalCorrect = questions.stream()
+                .mapToInt(question -> question.getIfIsCorrect() ? 1 : 0)
+                .sum();
+
+        System.out.println(totalCorrect);
+
     }
 
     private static boolean compareResult(String answer, Question currentQuestion) {
