@@ -21,6 +21,12 @@ public class Main {
 
     }
 
+    private static void printResult(Question currentQuestion) {
+        if (currentQuestion.getIfIsCorrect()){
+            System.out.println("Correcto");
+        }else System.out.println("A ver si estudiamos mas...");
+    }
+
     private static String giveAnswer() {
         Scanner sc = new Scanner(System.in);
         String text = sc.nextLine();
