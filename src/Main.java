@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,6 +19,12 @@ public class Main {
 
         }
 
+    }
+
+    private static String giveAnswer() {
+        Scanner sc = new Scanner(System.in);
+        String text = sc.nextLine();
+        return text;
     }
 
     private static void printQuestion(Question currentQuestion) {
