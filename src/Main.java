@@ -7,6 +7,17 @@ public class Main {
 
         List<Question> questions = createListQuestion();
 
+
+
+        for (Question currentQuestion:questions) {
+
+            printQuestion(currentQuestion);
+            String answer = giveAnswer();
+            currentQuestion.setIfIsCorrect(compareResult(answer,currentQuestion));
+            printResult(currentQuestion);
+
+        }
+
     }
 
     private static List<Question> createListQuestion() {

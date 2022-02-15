@@ -22,7 +22,7 @@ public class Question {
         return isCorrect;
     }
 
-    public void setCorrect(boolean correct) {
+    public void setIfIsCorrect(boolean correct) {
         isCorrect = correct;
     }
 
