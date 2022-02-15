@@ -76,6 +76,9 @@ public class Main {
         questions.add(question7);
         questions.add(question8);
         questions.add(question9);
+        questions.add(question11);
+        questions.add(question12);
+        questions.add(question13);
         questions.add(question16);
         questions.add(question17);
         questions.add(question18);
