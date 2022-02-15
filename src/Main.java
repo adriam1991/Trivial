@@ -66,7 +66,10 @@ public class Main {
         Question question11 = new Question("Cuantas caras tiene el cubo de rubick?:","6","Diversion");
         Question question12 = new Question("¿Qué sube, pero nunca baja?:","Edad","Diversion");
         Question question13 = new Question("¿Qué entra duro pero sale blando y suave?:","Chicle","Diversion");
-
+        Question question6 = new Question("Donde nace el rio Ebro?:","Fontibre","Geografia");
+        Question question7 = new Question("Que rio pasa por París?:","Sena","Geografia");
+        Question question8 = new Question("Cual es la capital de Japón?:","Tokio","Geografia");
+        Question question9= new Question("Que rio pasa por Londres?", "Tamesis","Geografia");
         questions.add(question1);
         questions.add(question2);
         questions.add(question3);
