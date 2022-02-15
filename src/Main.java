@@ -33,6 +33,10 @@ public class Main {
         return text;
     }
 
+    private static void printQuestion(Question currentQuestion) {
+        System.out.println(currentQuestion);
+    }
+
     private static List<Question> createListQuestion() {
         List<Question> questions = new ArrayList<>();
 
