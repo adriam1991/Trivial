@@ -59,14 +59,19 @@ public class Main {
         Question question3 = new Question("De que color es el caballo blanco de SAntiago?:","Blanco", "Culturilla General");
         Question question4 = new Question("Quien escribió 100 años de soledad?:","Garcia Marquez","Literatura y cine");
         Question question5 = new Question("Quien dirigió el film Indiana Jones?:","Steven Spilberg","Literatura y cine");
-
-
+        Question question6 = new Question("Donde nace el rio Ebro?:","Fontibre","Geografia");
+        Question question7 = new Question("Que rio pasa por París?:","Sena","Geografia");
+        Question question8 = new Question("Cual es la capital de Japón?:","Tokio","Geografia");
+        Question question9= new Question("Que rio pasa por Londres?", "Tamesis","Geografia");
         questions.add(question1);
         questions.add(question2);
         questions.add(question3);
         questions.add(question4);
         questions.add(question5);
-
+        questions.add(question6);
+        questions.add(question7);
+        questions.add(question8);
+        questions.add(question9);
         return questions;
     }
 }
