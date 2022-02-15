@@ -28,7 +28,7 @@ public class Main {
     }
 
     private static void printQuestion(Question currentQuestion) {
-        System.out.println(currentQuestion);
+        System.out.println(currentQuestion.getQuestion());
     }
 
     private static List<Question> createListQuestion() {
