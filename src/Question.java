@@ -3,6 +3,7 @@ public class Question {
     private boolean isCorrect;
     private String question;
     private String answer;
+    private String theme;
 
     public Question(String question, String answer) {
 
