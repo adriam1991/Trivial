@@ -20,6 +20,14 @@ public class Main {
 
     }
 
+    private static boolean compareResult(String answer, Question currentQuestion) {
+
+
+        return answer.equalsIgnoreCase(currentQuestion.getAnswer());
+
+
+    }
+
     private static List<Question> createListQuestion() {
         List<Question> questions = new ArrayList<>();
 
