@@ -55,11 +55,13 @@ public class Main {
         List<Question> questions = new ArrayList<>();
 
         Question question1 = new Question("Cual es la capital de Portugal?:","Lisboa","Geografia");
-        Question question2 = new Question("Cuantas caras tiene un dado?:","Seis caras", "Diversion");
+        Question question2 = new Question("Cuantas caras tiene un dado?:","6", "Diversion");
         Question question3 = new Question("De que color es el caballo blanco de SAntiago?:","Blanco", "Culturilla General");
         Question question4 = new Question("Quien escribió 100 años de soledad?:","Garcia Marquez","Literatura y cine");
         Question question5 = new Question("Quien dirigió el film Indiana Jones?:","Steven Spilberg","Literatura y cine");
-
+        Question question11 = new Question("Cuantas caras tiene el cubo de rubick?:","6","Diversion");
+        Question question12 = new Question("¿Qué sube, pero nunca baja?:","Edad","Diversion");
+        Question question13 = new Question("¿Qué entra duro pero sale blando y suave?:","Chicle","Diversion");
 
         questions.add(question1);
         questions.add(question2);
