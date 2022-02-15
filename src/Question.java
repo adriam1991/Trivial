@@ -5,10 +5,11 @@ public class Question {
     private String answer;
     private String theme;
 
-    public Question(String question, String answer) {
+    public Question(String question, String answer, String theme) {
 
         this.question = question;
         this.answer = answer;
+        this.theme = theme;
     }
 
     public String getAnswer() {
