@@ -18,7 +18,7 @@ public class Question {
         this.answer = answer;
     }
 
-    public boolean isCorrect() {
+    public boolean getIfIsCorrect() {
         return isCorrect;
     }
 
