@@ -8,14 +8,14 @@ public class Main {
 
         List<Question> questions = createListQuestion();
 
-
-
         for (Question currentQuestion:questions) {
-
+            String theme = askForTheme(questions);
+            selectTheme(theme,questions);
             printQuestion(currentQuestion);
             String answer = giveAnswer();
             currentQuestion.setIfIsCorrect(compareResult(answer,currentQuestion));
             printResult(currentQuestion);
+
 
         }
 
