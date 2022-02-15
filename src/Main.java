@@ -1,16 +1,18 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 
 
         List<Question> questions = createListQuestion();
+        HashMap<String,List<Question>> mapThemes = createMapThemes();
+
+
+
 
         for (Question currentQuestion:questions) {
             String theme = askForTheme(questions);
-            selectTheme(theme,questions);
+            List<Question> questionsOfTheme = selectTheme(theme,questions);
             printQuestion(currentQuestion);
             String answer = giveAnswer();
             currentQuestion.setIfIsCorrect(compareResult(answer,currentQuestion));
@@ -24,6 +26,21 @@ public class Main {
                 .sum();
 
         System.out.println(totalCorrect);
+
+    }
+
+    private static HashMap<String, List<Question>> createMapThemes() {
+        HashMap<String,List<Question>> mapThemes = new HashMap<>();
+
+        List<Question> artQuestions = createListQuestion("Geografía");
+
+        mapThemes.put("Art",artQuestions);
+
+
+
+    }
+
+    private static List<Question> selectTheme(String theme, List<Question> questions) {
 
     }
 
@@ -51,25 +68,44 @@ public class Main {
         System.out.println(currentQuestion.getQuestion());
     }
 
-    private static List<Question> createListQuestion() {
+    private static List<Question> createListQuestion(String theme) {
         List<Question> questions = new ArrayList<>();
 
-        Question question1 = new Question("Cual es la capital de Portugal?:","Lisboa","Geografia");
-        Question question2 = new Question("Cuantas caras tiene un dado?:","Seis caras", "Diversion");
-        Question question3 = new Question("De que color es el caballo blanco de SAntiago?:","Blanco", "Culturilla General");
-        Question question16 = new Question("¿Quién escribió La Odisea?","Homero", "Culturilla General");
-        Question question17 = new Question("¿Qué tipo de animal es la ballena?","Mamifero", "Culturilla General");
-        Question question18 = new Question("¿Qué cantidad de huesos en el cuerpo humano adulto?","206", "Culturilla General");
-        Question question19 = new Question("¿Cuándo acabó la II Guerra Mundial?","1945", "Culturilla General");
-        Question question4 = new Question("Quien escribió 100 años de soledad?:","Garcia Marquez","Literatura y cine");
-        Question question5 = new Question("Quien dirigió el film Indiana Jones?:","Steven Spilberg","Literatura y cine");
-        Question question11 = new Question("Cuantas caras tiene el cubo de rubick?:","6","Diversion");
-        Question question12 = new Question("¿Qué sube, pero nunca baja?:","Edad","Diversion");
-        Question question13 = new Question("¿Qué entra duro pero sale blando y suave?:","Chicle","Diversion");
-        Question question6 = new Question("Donde nace el rio Ebro?:","Fontibre","Geografia");
-        Question question7 = new Question("Que rio pasa por París?:","Sena","Geografia");
-        Question question8 = new Question("Cual es la capital de Japón?:","Tokio","Geografia");
-        Question question9= new Question("Que rio pasa por Londres?", "Tamesis","Geografia");
+        switch (theme) {
+            case "Geografía" :
+                questions.add(new Question("Donde nace el rio Ebro?:","Fontibre","Geografia"));
+                questions.add(new Question("Que rio pasa por París?:","Sena","Geografia"));
+                questions.add(new Question("Cual es la capital de Japón?:","Tokio","Geografia"));
+                questions.add(new Question("Que rio pasa por Londres?", "Tamesis","Geografia"));
+                questions.add(new Question("Cual es la capital de Portugal?:","Lisboa","Geografia"));
+                break;
+            case "Culturilla General" :
+                Question question3 = new Question("De que color es el caballo blanco de SAntiago?:","Blanco", "Culturilla General");
+                Question question16 = new Question("¿Quién escribió La Odisea?","Homero", "Culturilla General");
+                Question question17 = new Question("¿Qué tipo de animal es la ballena?","Mamifero", "Culturilla General");
+                Question question18 = new Question("¿Qué cantidad de huesos en el cuerpo humano adulto?","206", "Culturilla General");
+                Question question19 = new Question("¿Cuándo acabó la II Guerra Mundial?","1945", "Culturilla General");
+                break;
+            case "Diversion" :
+                Question question2 = new Question("Cuantas caras tiene un dado?:","Seis caras", "Diversion");
+                Question question11 = new Question("Cuantas caras tiene el cubo de rubick?:","6","Diversion");
+                Question question12 = new Question("¿Qué sube, pero nunca baja?:","Edad","Diversion");
+                Question question13 = new Question("¿Qué entra duro pero sale blando y suave?:","Chicle","Diversion");
+                break;
+            case "Literatura y cine":
+                Question question4 = new Question("Quien escribió 100 años de soledad?:","Garcia Marquez","Literatura y cine");
+                Question question5 = new Question("Quien dirigió el film Indiana Jones?:","Steven Spilberg","Literatura y cine");
+                break;
+
+
+
+        }
+
+
+
+
+
+
         questions.add(question1);
         questions.add(question2);
         questions.add(question3);

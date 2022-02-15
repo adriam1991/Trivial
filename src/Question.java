@@ -12,6 +12,14 @@ public class Question {
         this.theme = theme;
     }
 
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
     public String getAnswer() {
         return answer;
     }
