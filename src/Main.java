@@ -61,16 +61,27 @@ public class Main {
         Question question17 = new Question("¿Qué tipo de animal es la ballena?","Mamifero", "Culturilla General");
         Question question18 = new Question("¿Qué cantidad de huesos en el cuerpo humano adulto?","206", "Culturilla General");
         Question question19 = new Question("¿Cuándo acabó la II Guerra Mundial?","1945", "Culturilla General");
-
         Question question4 = new Question("Quien escribió 100 años de soledad?:","Garcia Marquez","Literatura y cine");
         Question question5 = new Question("Quien dirigió el film Indiana Jones?:","Steven Spilberg","Literatura y cine");
-
-
+        Question question11 = new Question("Cuantas caras tiene el cubo de rubick?:","6","Diversion");
+        Question question12 = new Question("¿Qué sube, pero nunca baja?:","Edad","Diversion");
+        Question question13 = new Question("¿Qué entra duro pero sale blando y suave?:","Chicle","Diversion");
+        Question question6 = new Question("Donde nace el rio Ebro?:","Fontibre","Geografia");
+        Question question7 = new Question("Que rio pasa por París?:","Sena","Geografia");
+        Question question8 = new Question("Cual es la capital de Japón?:","Tokio","Geografia");
+        Question question9= new Question("Que rio pasa por Londres?", "Tamesis","Geografia");
         questions.add(question1);
         questions.add(question2);
         questions.add(question3);
         questions.add(question4);
         questions.add(question5);
+        questions.add(question6);
+        questions.add(question7);
+        questions.add(question8);
+        questions.add(question9);
+        questions.add(question11);
+        questions.add(question12);
+        questions.add(question13);
         questions.add(question16);
         questions.add(question17);
         questions.add(question18);
