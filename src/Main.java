@@ -10,10 +10,10 @@ public class Main {
     public static void main(String[] args) {
 
 
-        HashMap<String, List<Question>> mapThemes = createMapThemes();//inicializar
-        int count = 0;
+        HashMap<String, List<Question>> mapThemes = createMapThemes();
+        boolean playing = true;
 
-        while (count < 5) {
+        while (playing) {
 
             String theme = askForTheme();
             List<Question> questionsOfTheme = selectTheme(theme, mapThemes);//Hacer funcion de seleccion
@@ -21,25 +21,24 @@ public class Main {
             String answer = giveAnswer();
             questionsOfTheme.get(0).setIfIsCorrect(compareResult(answer, questionsOfTheme));
             printResult(questionsOfTheme);
-            count++;
+            mapThemes.get(theme).remove(0);
+            playing = continuePlaying();
 
         }
 
-        /*int totalCorrect = questions.stream()
+        int totalCorrect = mapThemes.values().stream()
                 .mapToInt(question -> question.getIfIsCorrect() ? 1 : 0)
-                .sum();*/
+                .sum();
 
         // System.out.println(totalCorrect);
 
     }
 
+
     private static String askForTheme() {
-        System.out.println("Que tema quieres jugar?");
+        System.out.println("Dime un tema entre estos: " + CULTURILLA_GENERAL + GEOGRAFÍA + DIVERSION + LITERATURA_Y_CINE);
         Scanner sc = new Scanner(System.in);
         return sc.next();
-    }
-
-    private static String askForTheme(List<Question> questions) {
     }
 
     private static HashMap<String, List<Question>> createMapThemes() {
@@ -66,7 +65,6 @@ public class Main {
     private static List<Question> selectTheme(String theme, HashMap<String, List<Question>> questions) {
 
         List<Question> questionsOfTheme = questions.get(theme);
-        questions.remove(theme, 0);
         return questionsOfTheme;
 
     }
@@ -93,10 +91,9 @@ public class Main {
         System.out.println(questionsOfTheme.get(0).getQuestion());
     }
 
-    private static List<Question> createListQuestion(String geografía) {
+    private static List<Question> createListQuestion(String theme) {
 
         List<Question> questions = new ArrayList<>();
-
 
 
         switch (theme) {
@@ -108,12 +105,12 @@ public class Main {
                 questions.add(new Question("Cual es la capital de Portugal?:", "Lisboa", "Geografia"));
                 break;
 
-            case CULTURILLA_GENERAL :
-                questions.add(new Question("De que color es el caballo blanco de SAntiago?:","Blanco", "Culturilla General"));
-                questions.add(new Question("¿Quién escribió La Odisea?","Homero", "Culturilla General"));
-                questions.add(new Question("¿Qué tipo de animal es la ballena?","Mamifero", "Culturilla General"));
-                questions.add(new Question("¿Qué cantidad de huesos en el cuerpo humano adulto?","206", "Culturilla General"));
-                questions.add(new Question("¿Cuándo acabó la II Guerra Mundial?","1945", "Culturilla General"));
+            case CULTURILLA_GENERAL:
+                questions.add(new Question("De que color es el caballo blanco de SAntiago?:", "Blanco", "Culturilla General"));
+                questions.add(new Question("¿Quién escribió La Odisea?", "Homero", "Culturilla General"));
+                questions.add(new Question("¿Qué tipo de animal es la ballena?", "Mamifero", "Culturilla General"));
+                questions.add(new Question("¿Qué cantidad de huesos en el cuerpo humano adulto?", "206", "Culturilla General"));
+                questions.add(new Question("¿Cuándo acabó la II Guerra Mundial?", "1945", "Culturilla General"));
                 break;
             case DIVERSION:
                 questions.add(new Question("Cuantas caras tiene un dado?:", "Seis caras", "Diversion"));
@@ -124,8 +121,8 @@ public class Main {
             case LITERATURA_Y_CINE:
                 questions.add(new Question("Quien escribió 100 años de soledad?:", "Garcia Marquez", "Literatura y cine"));
                 questions.add(new Question("Quien dirigió el film Indiana Jones?:", "Steven Spilberg", "Literatura y cine"));
-                questions.add(new Question("Quien escribió 100 años de soledad?:","Garcia Marquez","Literatura y cine"));
-                questions.add(new Question("Quien dirigió el film Indiana Jones?:","Steven Spilberg","Literatura y cine"));
+                questions.add(new Question("Quien escribió 100 años de soledad?:", "Garcia Marquez", "Literatura y cine"));
+                questions.add(new Question("Quien dirigió el film Indiana Jones?:", "Steven Spilberg", "Literatura y cine"));
                 break;
 
 
