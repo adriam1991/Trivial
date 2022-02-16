@@ -7,16 +7,17 @@ public class Main {
     public static void main(String[] args) {
 
 
-        HashMap<String, List<Question>> mapThemes = createMapThemes();
+        HashMap<String, List<Question>> mapThemes = createMapThemes();//inicializar
 
 
-        for (Question currentQuestion : questions) {
+        for (int i = 0; i < mapThemes.size(); i++) {
+
             String theme = askForTheme();
-            List<Question> questionsOfTheme = selectTheme(theme, questions);
-            printQuestion(currentQuestion);
+            List<Question> questionsOfTheme = selectTheme(theme, mapThemes);//Hacer funcion de seleccion
+            printQuestion(questionsOfTheme);
             String answer = giveAnswer();
-            currentQuestion.setIfIsCorrect(compareResult(answer, currentQuestion));
-            printResult(currentQuestion);
+            questionsOfTheme.setIfIsCorrect(compareResult(answer, currentTheme));
+            printResult(currentTheme);
 
 
         }
@@ -51,7 +52,7 @@ public class Main {
 
     }
 
-    private static List<Question> selectTheme(String theme, List<Question> questions) {
+    private static List<Question> selectTheme(String theme, HashMap<String, List<Question>> questions) {
 
     }
 
@@ -75,7 +76,7 @@ public class Main {
         return text;
     }
 
-    private static void printQuestion(Question currentQuestion) {
+    private static void printQuestion(List<Question> currentQuestion) {
         System.out.println(currentQuestion.getQuestion());
     }
 
