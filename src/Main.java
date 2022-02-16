@@ -108,20 +108,20 @@ public class Main {
                 questions.add(new Question("Cual es la capital de Portugal?:", "Lisboa", "Geografia"));
                 break;
 
-            case "CULTURILLA_GENERAL" :
+            case CULTURILLA_GENERAL :
                 questions.add(new Question("De que color es el caballo blanco de SAntiago?:","Blanco", "Culturilla General"));
                 questions.add(new Question("¿Quién escribió La Odisea?","Homero", "Culturilla General"));
                 questions.add(new Question("¿Qué tipo de animal es la ballena?","Mamifero", "Culturilla General"));
                 questions.add(new Question("¿Qué cantidad de huesos en el cuerpo humano adulto?","206", "Culturilla General"));
                 questions.add(new Question("¿Cuándo acabó la II Guerra Mundial?","1945", "Culturilla General"));
                 break;
-            case "DIVERSION":
+            case DIVERSION:
                 questions.add(new Question("Cuantas caras tiene un dado?:", "Seis caras", "Diversion"));
                 questions.add(new Question("Cuantas caras tiene el cubo de rubick?:", "6", "Diversion"));
                 questions.add(new Question("¿Qué sube, pero nunca baja?:", "Edad", "Diversion"));
                 questions.add(new Question("¿Qué entra duro pero sale blando y suave?:", "Chicle", "Diversion"));
 
-            case "LITERATURA_Y_CINE":
+            case LITERATURA_Y_CINE:
                 questions.add(new Question("Quien escribió 100 años de soledad?:", "Garcia Marquez", "Literatura y cine"));
                 questions.add(new Question("Quien dirigió el film Indiana Jones?:", "Steven Spilberg", "Literatura y cine"));
                 questions.add(new Question("Quien escribió 100 años de soledad?:","Garcia Marquez","Literatura y cine"));
