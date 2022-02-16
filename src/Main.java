@@ -8,25 +8,25 @@ public class Main {
 
 
         HashMap<String, List<Question>> mapThemes = createMapThemes();//inicializar
+        int count = 0;
 
-
-        for (int i = 0; i < mapThemes.size(); i++) {
+        while (count < 5) {
 
             String theme = askForTheme();
             List<Question> questionsOfTheme = selectTheme(theme, mapThemes);//Hacer funcion de seleccion
             printQuestion(questionsOfTheme);
             String answer = giveAnswer();
-            questionsOfTheme.setIfIsCorrect(compareResult(answer, currentTheme));
-            printResult(currentTheme);
-
+            questionsOfTheme.get(0).setIfIsCorrect(compareResult(answer, questionsOfTheme));
+            printResult(questionsOfTheme);
+            count++;
 
         }
 
-        int totalCorrect = questions.stream()
+        /*int totalCorrect = questions.stream()
                 .mapToInt(question -> question.getIfIsCorrect() ? 1 : 0)
-                .sum();
+                .sum();*/
 
-        System.out.println(totalCorrect);
+        // System.out.println(totalCorrect);
 
     }
 
@@ -48,27 +48,26 @@ public class Main {
         mapThemes.put(CULTURILLA_GENERAL, geoQuestions);
 
 
-
+        return mapThemes;
 
     }
 
     private static List<Question> selectTheme(String theme, HashMap<String, List<Question>> questions) {
 
-        List<Question> questionsOfTheme =
-        //theme.equalsIgnoreCase(HashMap<>);
+        List<Question> questionsOfTheme = questions.get(theme);
+        questions.remove(theme, 0);
+        return questionsOfTheme;
 
     }
 
-    private static boolean compareResult(String answer, Question currentQuestion) {
+    private static boolean compareResult(String answer, List<Question> currentQuestion) {
 
-
-        return answer.equalsIgnoreCase(currentQuestion.getAnswer());
-
+        return answer.equalsIgnoreCase(currentQuestion.get(0).getAnswer());
 
     }
 
-    private static void printResult(Question currentQuestion) {
-        if (currentQuestion.getIfIsCorrect()) {
+    private static void printResult(List<Question> currentQuestion) {
+        if (currentQuestion.get(0).getIfIsCorrect()) {
             System.out.println("Correcto");
         } else System.out.println("A ver si estudiamos mas...");
     }
@@ -79,8 +78,8 @@ public class Main {
         return text;
     }
 
-    private static void printQuestion(List<Question> currentQuestion) {
-        System.out.println(currentQuestion.getQuestion());
+    private static void printQuestion(List<Question> questionsOfTheme) {
+        System.out.println(questionsOfTheme.get(0).getQuestion());
     }
 
     private static List<Question> createListQuestion(String theme) {
