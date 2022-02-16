@@ -54,6 +54,9 @@ public class Main {
 
     private static List<Question> selectTheme(String theme, HashMap<String, List<Question>> questions) {
 
+        List<Question> questionsOfTheme =
+        //theme.equalsIgnoreCase(HashMap<>);
+
     }
 
     private static boolean compareResult(String answer, Question currentQuestion) {
