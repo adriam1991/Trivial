@@ -2,34 +2,33 @@ import java.util.*;
 
 public class Main {
 
-    public static final String GENERAL_CULTUR = "Culturilla general";
+    public static final String GENERAL_CULTUR = "Culturilla";
     public static final String GEOGRAPY = "Geografía";
     public static final String FUNNY = "Diversion";
-    public static final String LITERATUR_AND_CINEMA = "Literatura y cine";
+    public static final String LITERATUR_AND_CINEMA = "Arte";
     public static final int MAX_POINTS = 5;
 
 
     public static void main(String[] args) {
 
         HashMap<String, List<Question>> mapThemes = createMapThemes();
-        int correctAnswers = 0;
+        int countCorrectAnswers = 0;
 
         while (!hasWon(mapThemes) && hasRemainingQuestions(mapThemes)) {
             String theme = askForTheme();
-            correctAnswers = playQuestion(mapThemes, theme, correctAnswers);
+            countCorrectAnswers = playQuestion(mapThemes, theme, countCorrectAnswers);
 
         }
-        printFinalGame(!hasWon(mapThemes),hasRemainingQuestions(mapThemes));
+        printFinalGame(!hasWon(mapThemes));
     }
 
-    private static void printFinalGame(boolean b, boolean hasRemainingQuestions) {
-        if (b) System.out.println("Has ganado");
+    private static void printFinalGame(boolean hasWon) {
+        if (hasWon) System.out.println("Has ganado");
         else System.out.println("Has perdido");
     }
 
     private static boolean hasRemainingQuestions(HashMap<String, List<Question>> mapThemes) {
-        if(mapThemes.values().isEmpty()) return false;
-        return true;
+        return !mapThemes.values().isEmpty();
     }
 
     private static int playQuestion(HashMap<String, List<Question>> mapThemes, String theme, int correctAnswers) {
@@ -48,7 +47,7 @@ public class Main {
 
     private static boolean hasQuestion(List<Question> questionsOfTheme) {
 
-        if (questionsOfTheme.get(0) == null) {
+        if (questionsOfTheme.isEmpty()) {
             System.out.println("No quedan preguntas de esta categoria, por favor escribe otra.");
             return false;
         }
@@ -72,6 +71,7 @@ public class Main {
                 if (currentQuestion.getIfIsCorrect()) {
 
                     count++;
+
                 }
             }
         }
@@ -81,15 +81,12 @@ public class Main {
 
     private static boolean hasWon(HashMap<String, List<Question>> mapThemes) {
 
-        if (countCorrectAnswer(mapThemes) >= MAX_POINTS) {
-            return false;
-        }
-        return true;
+        return countCorrectAnswer(mapThemes) >= MAX_POINTS;
     }
 
 
     private static String askForTheme() {
-        System.out.println("Dime un tema entre estos: " + GENERAL_CULTUR + GEOGRAPY + FUNNY + LITERATUR_AND_CINEMA);
+        System.out.println("Dime un tema entre estos: " + GENERAL_CULTUR + " " + GEOGRAPY + " " + FUNNY + " " + LITERATUR_AND_CINEMA);
         Scanner sc = new Scanner(System.in);
         return sc.next();
     }
