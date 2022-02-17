@@ -6,31 +6,60 @@ public class Main {
     public static final String GEOGRAPY = "Geografía";
     public static final String FUNNY = "Diversion";
     public static final String LITERATUR_AND_CINEMA = "Literatura y cine";
-    public static final int MAX_POINT = 5;
-    public static final int PLAY = 1;
-    public static final int WIN = 2;
-    public static final int LOSE = 3;
+    public static final int MAX_POINTS = 5;
+
 
     public static void main(String[] args) {
 
         HashMap<String, List<Question>> mapThemes = createMapThemes();
-        int playing = PLAY;
+        int correctAnswers = 0;
 
-        while (playing == PLAY) {
+        while (!hasWon(mapThemes) && hasRemainingQuestions(mapThemes)) {
             String theme = askForTheme();
-            playQuestion(mapThemes, theme);
-            playing = continuePlaying(mapThemes);
+            correctAnswers = playQuestion(mapThemes, theme, correctAnswers);
+
         }
-        printFinalGame();
+        printFinalGame(!hasWon(mapThemes),hasRemainingQuestions(mapThemes));
     }
 
-    private static void playQuestion(HashMap<String, List<Question>> mapThemes, String theme) {
+    private static void printFinalGame(boolean b, boolean hasRemainingQuestions) {
+        if (b) System.out.println("Has ganado");
+        else System.out.println("Has perdido");
+    }
+
+    private static boolean hasRemainingQuestions(HashMap<String, List<Question>> mapThemes) {
+        if(mapThemes.values().isEmpty()) return false;
+        return true;
+    }
+
+    private static int playQuestion(HashMap<String, List<Question>> mapThemes, String theme, int correctAnswers) {
         List<Question> questionsOfTheme = selectTheme(theme, mapThemes);
-        printQuestion(questionsOfTheme);
-        String answer = giveAnswer();
-        questionsOfTheme.get(0).setIfIsCorrect(compareResult(answer, questionsOfTheme));
-        printResult(questionsOfTheme);
-        mapThemes.get(theme).remove(0);
+
+        if (hasQuestion(questionsOfTheme)) {
+            printQuestion(questionsOfTheme);
+            String answer = giveAnswer();
+            correctAnswers = isAnswerCorrect(questionsOfTheme, answer, correctAnswers);
+            printResult(questionsOfTheme);
+            mapThemes.get(theme).remove(0);
+        }
+
+        return correctAnswers;
+    }
+
+    private static boolean hasQuestion(List<Question> questionsOfTheme) {
+
+        if (questionsOfTheme.get(0) == null) {
+            System.out.println("No quedan preguntas de esta categoria, por favor escribe otra.");
+            return false;
+        }
+        return true;
+    }
+
+    private static int isAnswerCorrect(List<Question> questionsOfTheme, String answer, int correctAnswers) {
+        if (questionsOfTheme.get(0).setIfIsCorrect(compareResult(answer, questionsOfTheme))) {
+            correctAnswers++;
+        }
+        return correctAnswers;
     }
 
     private static int countCorrectAnswer(HashMap<String, List<Question>> mapThemes) {
@@ -50,26 +79,12 @@ public class Main {
         return count;
     }
 
-    private static int continuePlaying(HashMap<String, List<Question>> mapThemes) {
+    private static boolean hasWon(HashMap<String, List<Question>> mapThemes) {
 
-        if (countCorrectAnswer(mapThemes) >= MAX_POINT) {
-
-            return WIN;
-
+        if (countCorrectAnswer(mapThemes) >= MAX_POINTS) {
+            return false;
         }
-        if (runOutOfQuestions(mapThemes)) {
-
-
-            return LOSE;
-
-        }
-
-        return PLAY;
-    }
-
-    private static boolean runOutOfQuestions(HashMap<String, List<Question>> mapThemes) {
-
-
+        return true;
     }
 
 

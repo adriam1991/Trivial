@@ -32,8 +32,9 @@ public class Question {
         return isCorrect;
     }
 
-    public void setIfIsCorrect(boolean correct) {
+    public boolean setIfIsCorrect(boolean correct) {
         isCorrect = correct;
+        return correct;
     }
 
     public String getQuestion() {
