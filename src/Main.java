@@ -6,6 +6,10 @@ public class Main {
     public static final String GEOGRAPY = "Geografía";
     public static final String FUNNY = "Diversion";
     public static final String LITERATUR_AND_CINEMA = "Literatura y cine";
+    public static final int MAX_POINT = 5 ;
+    public static final int PLAY = 1 ;
+    public static final int WIN = 2 ;
+    public static final int LOSE = 3 ;
 
     public static void main(String[] args) {
 
@@ -13,7 +17,7 @@ public class Main {
         HashMap< String, List<Question> > mapThemes = createMapThemes();
         int playing = PLAY;
 
-        while (playing) {
+        while (playing==PLAY) {
 
             String theme = askForTheme();
             List<Question> questionsOfTheme = selectTheme(theme, mapThemes);//Hacer funcion de seleccion
@@ -25,7 +29,7 @@ public class Main {
             playing = continuePlaying(mapThemes);
 
         }
-        printFinalGame()
+        printFinalGame();
     }
 
     private static int countCorrectAnswer(HashMap<String, List<Question>> mapThemes) {
