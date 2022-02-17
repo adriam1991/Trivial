@@ -6,30 +6,31 @@ public class Main {
     public static final String GEOGRAPY = "Geografía";
     public static final String FUNNY = "Diversion";
     public static final String LITERATUR_AND_CINEMA = "Literatura y cine";
-    public static final int MAX_POINT = 5 ;
-    public static final int PLAY = 1 ;
-    public static final int WIN = 2 ;
-    public static final int LOSE = 3 ;
+    public static final int MAX_POINT = 5;
+    public static final int PLAY = 1;
+    public static final int WIN = 2;
+    public static final int LOSE = 3;
 
     public static void main(String[] args) {
 
-
-        HashMap< String, List<Question> > mapThemes = createMapThemes();
+        HashMap<String, List<Question>> mapThemes = createMapThemes();
         int playing = PLAY;
 
-        while (playing==PLAY) {
-
+        while (playing == PLAY) {
             String theme = askForTheme();
-            List<Question> questionsOfTheme = selectTheme(theme, mapThemes);//Hacer funcion de seleccion
-            printQuestion(questionsOfTheme);
-            String answer = giveAnswer();
-            questionsOfTheme.get(0).setIfIsCorrect(compareResult(answer, questionsOfTheme));
-            printResult(questionsOfTheme);
-            mapThemes.get(theme).remove(0);
+            playQuestion(mapThemes, theme);
             playing = continuePlaying(mapThemes);
-
         }
         printFinalGame();
+    }
+
+    private static void playQuestion(HashMap<String, List<Question>> mapThemes, String theme) {
+        List<Question> questionsOfTheme = selectTheme(theme, mapThemes);
+        printQuestion(questionsOfTheme);
+        String answer = giveAnswer();
+        questionsOfTheme.get(0).setIfIsCorrect(compareResult(answer, questionsOfTheme));
+        printResult(questionsOfTheme);
+        mapThemes.get(theme).remove(0);
     }
 
     private static int countCorrectAnswer(HashMap<String, List<Question>> mapThemes) {
@@ -37,11 +38,11 @@ public class Main {
 
         for (String theme : mapThemes.keySet()) {
 
-            for ( Question currentQuestion : mapThemes.get(theme)) {
+            for (Question currentQuestion : mapThemes.get(theme)) {
 
-                if (currentQuestion.getIfIsCorrect()){
+                if (currentQuestion.getIfIsCorrect()) {
 
-                    count ++;
+                    count++;
                 }
             }
         }
@@ -51,12 +52,12 @@ public class Main {
 
     private static int continuePlaying(HashMap<String, List<Question>> mapThemes) {
 
-        if( countCorrectAnswer(mapThemes) >= MAX_POINT){
+        if (countCorrectAnswer(mapThemes) >= MAX_POINT) {
 
             return WIN;
 
         }
-        if(runOutOfQuestions(mapThemes)){
+        if (runOutOfQuestions(mapThemes)) {
 
 
             return LOSE;
@@ -67,7 +68,6 @@ public class Main {
     }
 
     private static boolean runOutOfQuestions(HashMap<String, List<Question>> mapThemes) {
-
 
 
     }
