@@ -2,14 +2,10 @@ import java.util.*;
 
 public class Main {
 
-    public static final String CULTURILLA_GENERAL = "Culturilla general";
-    public static final String GEOGRAFÍA = "Geografía";
-    public static final String DIVERSION = "Diversion";
-    public static final String LITERATURA_Y_CINE = "Literatura y cine";
-    public static final int MAX_POINT = 5 ;
-    public static final int PLAY = 1 ;
-    public static final int WIN = 2 ;
-    public static final int LOSE = 3 ;
+    public static final String GENERAL_CULTUR = "Culturilla general";
+    public static final String GEOGRAPY = "Geografía";
+    public static final String FUNNY = "Diversion";
+    public static final String LITERATUR_AND_CINEMA = "Literatura y cine";
 
     public static void main(String[] args) {
 
@@ -74,7 +70,7 @@ public class Main {
 
 
     private static String askForTheme() {
-        System.out.println("Dime un tema entre estos: " + CULTURILLA_GENERAL + GEOGRAFÍA + DIVERSION + LITERATURA_Y_CINE);
+        System.out.println("Dime un tema entre estos: " + GENERAL_CULTUR + GEOGRAPY + FUNNY + LITERATUR_AND_CINEMA);
         Scanner sc = new Scanner(System.in);
         return sc.next();
     }
@@ -83,17 +79,17 @@ public class Main {
 
         HashMap<String, List<Question>> mapThemes = new HashMap<>();
 
-        List<Question> geoQuestions = createListQuestion(GEOGRAFÍA);
-        mapThemes.put(GEOGRAFÍA, geoQuestions);
+        List<Question> geoQuestions = createListQuestion(GEOGRAPY);
+        mapThemes.put(GEOGRAPY, geoQuestions);
 
-        List<Question> culturQuestions = createListQuestion(CULTURILLA_GENERAL);
-        mapThemes.put(CULTURILLA_GENERAL, culturQuestions);
+        List<Question> culturQuestions = createListQuestion(GENERAL_CULTUR);
+        mapThemes.put(GENERAL_CULTUR, culturQuestions);
 
-        List<Question> funQuestions = createListQuestion(DIVERSION);
-        mapThemes.put(DIVERSION, funQuestions);
+        List<Question> funQuestions = createListQuestion(FUNNY);
+        mapThemes.put(FUNNY, funQuestions);
 
-        List<Question> literatureFilmsQuestions = createListQuestion(LITERATURA_Y_CINE);
-        mapThemes.put(LITERATURA_Y_CINE, literatureFilmsQuestions);
+        List<Question> literatureFilmsQuestions = createListQuestion(LITERATUR_AND_CINEMA);
+        mapThemes.put(LITERATUR_AND_CINEMA, literatureFilmsQuestions);
 
 
         return mapThemes;
@@ -135,7 +131,7 @@ public class Main {
 
 
         switch (theme) {
-            case GEOGRAFÍA:
+            case GEOGRAPY:
                 questions.add(new Question("Donde nace el rio Ebro?:", "Fontibre", "Geografia"));
                 questions.add(new Question("Que rio pasa por París?:", "Sena", "Geografia"));
                 questions.add(new Question("Cual es la capital de Japón?:", "Tokio", "Geografia"));
@@ -143,20 +139,20 @@ public class Main {
                 questions.add(new Question("Cual es la capital de Portugal?:", "Lisboa", "Geografia"));
                 break;
 
-            case CULTURILLA_GENERAL:
+            case GENERAL_CULTUR:
                 questions.add(new Question("De que color es el caballo blanco de SAntiago?:", "Blanco", "Culturilla General"));
                 questions.add(new Question("¿Quién escribió La Odisea?", "Homero", "Culturilla General"));
                 questions.add(new Question("¿Qué tipo de animal es la ballena?", "Mamifero", "Culturilla General"));
                 questions.add(new Question("¿Qué cantidad de huesos en el cuerpo humano adulto?", "206", "Culturilla General"));
                 questions.add(new Question("¿Cuándo acabó la II Guerra Mundial?", "1945", "Culturilla General"));
                 break;
-            case DIVERSION:
+            case FUNNY:
                 questions.add(new Question("Cuantas caras tiene un dado?:", "Seis caras", "Diversion"));
                 questions.add(new Question("Cuantas caras tiene el cubo de rubick?:", "6", "Diversion"));
                 questions.add(new Question("¿Qué sube, pero nunca baja?:", "Edad", "Diversion"));
                 questions.add(new Question("¿Qué entra duro pero sale blando y suave?:", "Chicle", "Diversion"));
 
-            case LITERATURA_Y_CINE:
+            case LITERATUR_AND_CINEMA:
                 questions.add(new Question("Quien escribió 100 años de soledad?:", "Garcia Marquez", "Literatura y cine"));
                 questions.add(new Question("Quien dirigió el film Indiana Jones?:", "Steven Spilberg", "Literatura y cine"));
                 questions.add(new Question("Quien escribió 100 años de soledad?:", "Garcia Marquez", "Literatura y cine"));
