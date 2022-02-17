@@ -6,12 +6,16 @@ public class Main {
     public static final String GEOGRAFÍA = "Geografía";
     public static final String DIVERSION = "Diversion";
     public static final String LITERATURA_Y_CINE = "Literatura y cine";
+    public static final int MAX_POINT = 5 ;
+    public static final int PLAY = 1 ;
+    public static final int WIN = 2 ;
+    public static final int LOSE = 3 ;
 
     public static void main(String[] args) {
 
 
-        HashMap<String, List<Question>> mapThemes = createMapThemes();
-        boolean playing = true;
+        HashMap< String, List<Question> > mapThemes = createMapThemes();
+        int playing = PLAY;
 
         while (playing) {
 
@@ -22,15 +26,49 @@ public class Main {
             questionsOfTheme.get(0).setIfIsCorrect(compareResult(answer, questionsOfTheme));
             printResult(questionsOfTheme);
             mapThemes.get(theme).remove(0);
-            playing = continuePlaying();
+            playing = continuePlaying(mapThemes);
+
+        }
+        printFinalGame()
+    }
+
+    private static int countCorrectAnswer(HashMap<String, List<Question>> mapThemes) {
+        int count = 0;
+
+        for (String theme : mapThemes.keySet()) {
+
+            for ( Question currentQuestion : mapThemes.get(theme)) {
+
+                if (currentQuestion.getIfIsCorrect()){
+
+                    count ++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    private static int continuePlaying(HashMap<String, List<Question>> mapThemes) {
+
+        if( countCorrectAnswer(mapThemes) >= MAX_POINT){
+
+            return WIN;
+
+        }
+        if(runOutOfQuestions(mapThemes)){
+
+
+            return LOSE;
 
         }
 
-        int totalCorrect = mapThemes.values().stream()
-                .mapToInt(question -> question.getIfIsCorrect() ? 1 : 0)
-                .sum();
+        return PLAY;
+    }
 
-        // System.out.println(totalCorrect);
+    private static boolean runOutOfQuestions(HashMap<String, List<Question>> mapThemes) {
+
+
 
     }
 
