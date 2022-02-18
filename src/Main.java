@@ -6,43 +6,56 @@ public class Main {
     public static final String GEOGRAPY = "Geografía";
     public static final String FUNNY = "Diversion";
     public static final String LITERATUR_AND_CINEMA = "Arte";
-    public static final int MAX_POINTS = 5;
+    public static final int MAX_POINTS_FOR_WIN = 5;
 
 
     public static void main(String[] args) {
 
-        HashMap<String, List<Question>> mapThemes = createMapThemes();
+        HashMap<String, List<Question>> mapTopics = createMapTopics();
         int countCorrectAnswers = 0;
 
-        while (!hasWon(mapThemes) && hasRemainingQuestions(mapThemes)) {
-            String theme = askForTheme();
-            countCorrectAnswers = playQuestion(mapThemes, theme, countCorrectAnswers);
+        while (!hasWon(countCorrectAnswers) && hasRemainingQuestions(mapTopics)) {
+            String topic = askForTopic();
+            List<Question> questionsOfTopic = selectTopic(topic, mapTopics);//pasar lista preguntas
+            boolean isCorrect = playQuestion(questionsOfTopic);
+            countCorrectAnswers = sumIfIsCorrect(isCorrect, countCorrectAnswers);//suma les correct
 
         }
-        printFinalGame(!hasWon(mapThemes));
+        printFinalGame(countCorrectAnswers);
     }
 
-    private static void printFinalGame(boolean hasWon) {
-        if (hasWon) System.out.println("Has ganado");
+    private static int sumIfIsCorrect(boolean isCorrect, int countCorrectAnswers) {
+        if (isCorrect) countCorrectAnswers++;
+        return countCorrectAnswers;
+    }
+
+
+    private static void printFinalGame(int countCorrectAnswers) {
+        if (countCorrectAnswers >= MAX_POINTS_FOR_WIN) System.out.println("Has ganado");
         else System.out.println("Has perdido");
     }
 
     private static boolean hasRemainingQuestions(HashMap<String, List<Question>> mapThemes) {
-        return !mapThemes.values().isEmpty();
+        for (List<Question> questions : mapThemes.values()) {
+            for (Question question : questions) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    private static int playQuestion(HashMap<String, List<Question>> mapThemes, String theme, int correctAnswers) {
-        List<Question> questionsOfTheme = selectTheme(theme, mapThemes);
+    private static boolean playQuestion(List<Question> questionsOfTopic) {
+        boolean isCorrect = false;
 
-        if (hasQuestion(questionsOfTheme)) {
-            printQuestion(questionsOfTheme);
+        if (hasQuestion(questionsOfTopic)) {
+            printQuestion(questionsOfTopic.remove(0));
             String answer = giveAnswer();
-            correctAnswers = isAnswerCorrect(questionsOfTheme, answer, correctAnswers);
-            printResult(questionsOfTheme);
-            mapThemes.get(theme).remove(0);
+            isCorrect = isAnswerCorrect(answer, questionsOfTopic.get(0));
+            printResult(isCorrect, questionsOfTopic.remove(0));
+            questionsOfTopic.remove(0);
         }
 
-        return correctAnswers;
+        return isCorrect;
     }
 
     private static boolean hasQuestion(List<Question> questionsOfTheme) {
@@ -54,44 +67,20 @@ public class Main {
         return true;
     }
 
-    private static int isAnswerCorrect(List<Question> questionsOfTheme, String answer, int correctAnswers) {
-        if (questionsOfTheme.get(0).setIfIsCorrect(compareResult(answer, questionsOfTheme))) {
-            correctAnswers++;
-        }
-        return correctAnswers;
-    }
 
-    private static int countCorrectAnswer(HashMap<String, List<Question>> mapThemes) {
-        int count = 0;
+    private static boolean hasWon(int countCorrectAnswer) {
 
-        for (String theme : mapThemes.keySet()) {
-
-            for (Question currentQuestion : mapThemes.get(theme)) {
-
-                if (currentQuestion.getIfIsCorrect()) {
-
-                    count++;
-
-                }
-            }
-        }
-
-        return count;
-    }
-
-    private static boolean hasWon(HashMap<String, List<Question>> mapThemes) {
-
-        return countCorrectAnswer(mapThemes) >= MAX_POINTS;
+        return countCorrectAnswer >= MAX_POINTS_FOR_WIN;
     }
 
 
-    private static String askForTheme() {
+    private static String askForTopic() {
         System.out.println("Dime un tema entre estos: " + GENERAL_CULTUR + " " + GEOGRAPY + " " + FUNNY + " " + LITERATUR_AND_CINEMA);
         Scanner sc = new Scanner(System.in);
         return sc.next();
     }
 
-    private static HashMap<String, List<Question>> createMapThemes() {
+    private static HashMap<String, List<Question>> createMapTopics() {
 
         HashMap<String, List<Question>> mapThemes = new HashMap<>();
 
@@ -112,23 +101,26 @@ public class Main {
 
     }
 
-    private static List<Question> selectTheme(String theme, HashMap<String, List<Question>> questions) {
+    private static List<Question> selectTopic(String theme, HashMap<String, List<Question>> questions) {
 
         List<Question> questionsOfTheme = questions.get(theme);
         return questionsOfTheme;
 
     }
 
-    private static boolean compareResult(String answer, List<Question> currentQuestion) {
+    private static boolean isAnswerCorrect(String answer, Question question) {
 
-        return answer.equalsIgnoreCase(currentQuestion.get(0).getAnswer());
+        return answer.equalsIgnoreCase(question.getAnswer());
 
     }
 
-    private static void printResult(List<Question> currentQuestion) {
-        if (currentQuestion.get(0).getIfIsCorrect()) {
+    private static void printResult(boolean isCorrect, Question question) {
+        if (isCorrect) {
             System.out.println("Correcto");
-        } else System.out.println("A ver si estudiamos mas...");
+        } else {
+            System.out.println("A ver si estudiamos mas...");
+            System.out.println("La respuesta correcta era: " + question.getAnswer());
+        }
     }
 
     private static String giveAnswer() {
@@ -137,8 +129,8 @@ public class Main {
         return text;
     }
 
-    private static void printQuestion(List<Question> questionsOfTheme) {
-        System.out.println(questionsOfTheme.get(0).getQuestion());
+    private static void printQuestion(Question question) {
+        System.out.println(question.getQuestion());
     }
 
     private static List<Question> createListQuestion(String theme) {
@@ -152,7 +144,6 @@ public class Main {
                 questions.add(new Question("Que rio pasa por París?:", "Sena", "Geografia"));
                 questions.add(new Question("Cual es la capital de Japón?:", "Tokio", "Geografia"));
                 questions.add(new Question("Que rio pasa por Londres?", "Tamesis", "Geografia"));
-                questions.add(new Question("Cual es la capital de Portugal?:", "Lisboa", "Geografia"));
                 break;
 
             case GENERAL_CULTUR:
@@ -160,13 +151,14 @@ public class Main {
                 questions.add(new Question("¿Quién escribió La Odisea?", "Homero", "Culturilla General"));
                 questions.add(new Question("¿Qué tipo de animal es la ballena?", "Mamifero", "Culturilla General"));
                 questions.add(new Question("¿Qué cantidad de huesos en el cuerpo humano adulto?", "206", "Culturilla General"));
-                questions.add(new Question("¿Cuándo acabó la II Guerra Mundial?", "1945", "Culturilla General"));
+
                 break;
             case FUNNY:
                 questions.add(new Question("Cuantas caras tiene un dado?:", "Seis caras", "Diversion"));
                 questions.add(new Question("Cuantas caras tiene el cubo de rubick?:", "6", "Diversion"));
                 questions.add(new Question("¿Qué sube, pero nunca baja?:", "Edad", "Diversion"));
                 questions.add(new Question("¿Qué entra duro pero sale blando y suave?:", "Chicle", "Diversion"));
+                break;
 
             case LITERATUR_AND_CINEMA:
                 questions.add(new Question("Quien escribió 100 años de soledad?:", "Garcia Marquez", "Literatura y cine"));
