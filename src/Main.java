@@ -13,16 +13,25 @@ public class Main {
 
         HashMap<String, List<Question>> mapTopics = createMapTopics();
         int countCorrectAnswers = 0;
+        int countTotalAnswers = 0;
 
         while (!hasWon(countCorrectAnswers) && hasRemainingQuestions(mapTopics)) {
             String topic = askForTopic();
             List<Question> questionsOfTopic = selectTopic(topic, mapTopics);//pasar lista preguntas
             boolean isCorrect = playQuestion(questionsOfTopic);
-            countCorrectAnswers = sumIfIsCorrect(isCorrect, countCorrectAnswers);//suma les correct
+            countCorrectAnswers = sumIfIsCorrect(isCorrect, countCorrectAnswers);
+            countTotalAnswers++;
+            //countTotalAnswers = sumIfIsIncorrect(isCorrect, countTotalAnswers);//suma les correct
 
         }
-        printFinalGame(countCorrectAnswers);
+        printFinalGame(countCorrectAnswers, countTotalAnswers);
     }
+
+    private static int sumIfIsIncorrect(boolean isCorrect, int countIncorrectAnswers) {
+        if (!isCorrect) countIncorrectAnswers++;
+        return countIncorrectAnswers;
+    }
+
 
     private static int sumIfIsCorrect(boolean isCorrect, int countCorrectAnswers) {
         if (isCorrect) countCorrectAnswers++;
@@ -30,9 +39,11 @@ public class Main {
     }
 
 
-    private static void printFinalGame(int countCorrectAnswers) {
+    private static void printFinalGame(int countCorrectAnswers, int countTotalAnswers) {
         if (countCorrectAnswers >= MAX_POINTS_FOR_WIN) System.out.println("Has ganado");
         else System.out.println("Has perdido");
+
+        System.out.println("Tu ratio de acierto es de: " + (countCorrectAnswers * 100 / (countTotalAnswers)) + "%");
     }
 
     private static boolean hasRemainingQuestions(HashMap<String, List<Question>> mapThemes) {
@@ -48,10 +59,10 @@ public class Main {
         boolean isCorrect = false;
 
         if (hasQuestion(questionsOfTopic)) {
-            printQuestion(questionsOfTopic.remove(0));
+            printQuestion(questionsOfTopic.get(0));
             String answer = giveAnswer();
             isCorrect = isAnswerCorrect(answer, questionsOfTopic.get(0));
-            printResult(isCorrect, questionsOfTopic.remove(0));
+            printResult(isCorrect, questionsOfTopic.get(0));
             questionsOfTopic.remove(0);
         }
 
@@ -104,6 +115,7 @@ public class Main {
     private static List<Question> selectTopic(String theme, HashMap<String, List<Question>> questions) {
 
         List<Question> questionsOfTheme = questions.get(theme);
+        Collections.shuffle(questionsOfTheme);
         return questionsOfTheme;
 
     }
@@ -154,7 +166,7 @@ public class Main {
 
                 break;
             case FUNNY:
-                questions.add(new Question("Cuantas caras tiene un dado?:", "Seis caras", "Diversion"));
+                questions.add(new Question("Cuantas caras tiene un dado?:", "6", "Diversion"));
                 questions.add(new Question("Cuantas caras tiene el cubo de rubick?:", "6", "Diversion"));
                 questions.add(new Question("¿Qué sube, pero nunca baja?:", "Edad", "Diversion"));
                 questions.add(new Question("¿Qué entra duro pero sale blando y suave?:", "Chicle", "Diversion"));
